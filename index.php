@@ -1,6 +1,13 @@
 <?php
 
 session_start();
+
+if (isset( $_POST['login'] ) ) {
+  // code...
+  $formEmail = $_POST['email'];
+  $formPass = $_POST['password'];
+}
+
 include('includes/header.php');
 
 // $password = password_hash("Start123!", PASSWORD_DEFAULT);

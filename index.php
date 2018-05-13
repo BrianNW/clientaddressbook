@@ -1,5 +1,10 @@
 <?php
+
+session_start();
 include('includes/header.php');
+
+// $password = password_hash("Start123!", PASSWORD_DEFAULT);
+// echo $password;
 ?>
 
 <h1>Client Address Book</h1>

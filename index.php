@@ -2,6 +2,9 @@
 
 session_start();
 
+include('includes/functions.php');
+
+// if login form was submitted
 if (isset( $_POST['login'] ) ) {
   // code...
   $formUsername = $_POST['username'];
@@ -36,12 +39,22 @@ if (isset( $_POST['login'] ) ) {
 
       // redirects user to clients page
       header( "Location: clients.php");
+    } else { // hashed password didn't verify
 
+      // error message
+      $loginError = "<div class='alert alert-danger'> Wrong username / password combination.  Try again. </div>";
     }
 
+  } else { // there are no results in database
+
+     // error message
+     $loginError = "<div class='alert alert-danger'> User does not exist.  Try again. <a class='close' data-dismiss='alert'>&times;</a></div>";
   }
 
 }
+
+// close mysql connection
+mysqli_close($conn);
 
 
 include('includes/header.php');
@@ -53,6 +66,8 @@ include('includes/header.php');
 <h1>Client Address Book</h1>
 <p class="lead">Log in to your account.</p>
 
+<?php echo $loginError; ?>
+
 <form class="form-inline" action="clients.php" method="post">
     <div class="form-group">
         <label for="login-username" class="sr-only">Username</label>
@@ -60,7 +75,7 @@ include('includes/header.php');
     </div>
     <div class="form-group">
         <label for="login-email" class="sr-only">Email</label>
-        <input type="text" class="form-control" id="login-email" placeholder="email" name="email">
+        <input type="text" class="form-control" id="login-email" placeholder="email" name="email" value="<?php echo $formEmail; ?>">
     </div>
     <div class="form-group">
         <label for="login-password" class="sr-only">Password</label>

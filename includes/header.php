@@ -1,3 +1,11 @@
+<?php
+
+  if(!isset($_SESSION["loggedInUser"])){
+        $_SESSION["loggedInUser"] = '';
+   }
+
+ ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -38,17 +46,29 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
 
+              <?php
+              if($_SESSION['loggedInUser'] ) {
+
+              ?>
+                <p class="navbar-text">Welcome, <?php echo $_SESSION["loggedInUser"]; ?></p>
                 <ul class="nav navbar-nav">
-                    <li><a href="clients.php">My Clients</a></li>
-                    <li><a href="add.php">Add Client</a></li>
-                </ul>
 
+                  <li><a href="clients.php">My Clients</a></li>
+                  <li><a href="add.php">Add Client</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <p class="navbar-text">Aloha, Brian</p>
 
-                    <li><a href="logout.php">Log out</a></li>
+                  <li><a href="logout.php">Log out</a></li>
                 </ul>
-
+                <?php
+              } else {
+                 ?>
+                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.php">Log in</a></li>
+                  </ul>
+              <?php
+                }
+              ?>
             </div>
 
         </div>
